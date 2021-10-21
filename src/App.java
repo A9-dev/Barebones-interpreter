@@ -2,8 +2,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class App {
+    static Map<String, Integer> variables = new HashMap<String, Integer>();
 
     public static void main(String[] args) throws Exception {
         String content = extracted();
@@ -24,10 +27,20 @@ public class App {
         for (int i = 0; i < lines.length; i++) {
             System.out.println(String.format("Adding to 2d array: %s", Arrays.toString(lines[i].split(" "))));
             linesSplit[i] = lines[i].split(" ");
-
         }
         System.out.println(String.format("Final array: %s", Arrays.deepToString(linesSplit)));
+        parseVariables(linesSplit);
         return linesSplit;
+    }
+
+    private static void parseVariables(String[][] linesSplit) {
+        for (String[] line : linesSplit) {
+            if (variables.get(line[1]) == null) {
+                variables.put(line[1], 0);
+
+            }
+        }
+        System.out.println(String.format("Found defined variables: %s", variables));
     }
 
     private static void execute(String[][] code) {

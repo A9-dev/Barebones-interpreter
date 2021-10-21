@@ -1,3 +1,5 @@
 clear name;
+clear test;
+clear foo;
 incr name;
 decr name;
