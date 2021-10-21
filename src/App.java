@@ -9,6 +9,8 @@ public class App {
     static Map<String, Integer> variables = new HashMap<String, Integer>();
 
     public static void main(String[] args) throws Exception {
+        // Main function: extracts code from txt, splits into lines, parses lines,
+        // executes parsed lines
         String content = extracted();
         String[] lines = content.split(";");
         String[][] code = parse(lines);
@@ -16,6 +18,7 @@ public class App {
     }
 
     private static String extracted() throws IOException {
+        // Reads lines from txt and removes \n from every line
         String content = new String(Files.readAllBytes(Paths.get("barebonesCode.txt")));
         content = content.replace("\n", "").replace("\r", "");
         return content;
@@ -29,18 +32,7 @@ public class App {
             linesSplit[i] = lines[i].split(" ");
         }
         System.out.println(String.format("Final array: %s", Arrays.deepToString(linesSplit)));
-        parseVariables(linesSplit);
         return linesSplit;
-    }
-
-    private static void parseVariables(String[][] linesSplit) {
-        for (String[] line : linesSplit) {
-            if (variables.get(line[1]) == null) {
-                variables.put(line[1], 0);
-
-            }
-        }
-        System.out.println(String.format("Found defined variables: %s", variables));
     }
 
     private static void execute(String[][] code) {
@@ -50,22 +42,34 @@ public class App {
 
             switch (opcode) {
             case "clear":
-                System.out.println(String.format("clear: %s", operand));
+                variables.put(operand, 0);
 
                 break;
             case "incr":
-                System.out.println(String.format("incr: %s", operand));
+                try {
+                    variables.replace(operand, variables.get(operand) + 1);
+                } catch (Exception e) {
+                    System.err.println(String.format(
+                            "Error occurred on line %s, most likely due to incrementing before variable declaration",
+                            i + 1));
+                }
 
                 break;
             case "decr":
-                System.out.println(String.format("decr: %s", operand));
+                try {
+                    variables.replace(operand, variables.get(operand) - 1);
+                } catch (Exception e) {
+                    System.err.println(String.format(
+                            "Error occurred on line %s, most likely due to decrementing before variable declaration",
+                            i + 1));
+                }
 
                 break;
 
             default:
                 break;
             }
+            System.out.println(variables.toString());
         }
-
     }
 }

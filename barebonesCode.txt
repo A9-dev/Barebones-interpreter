@@ -1,5 +1,6 @@
 clear name;
-clear test;
-clear foo;
 incr name;
 decr name;
+incr name;
+clear name;
+incr unknownVariable;
