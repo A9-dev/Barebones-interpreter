@@ -1,6 +1,8 @@
 clear name;
 incr name;
-decr name;
 incr name;
-clear name;
-incr unknownVariable;
+clear coolVariable;
+incr coolVariable;
+incr coolVariable;
+while coolVariable not 0 do;
+    decr coolVariable;

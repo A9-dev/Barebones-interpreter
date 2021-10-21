@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class App {
     static Map<String, Integer> variables = new HashMap<String, Integer>();
+    static int indentAmount = 0;
 
     public static void main(String[] args) throws Exception {
         // Main function: extracts code from txt, splits into lines, parses lines,
@@ -29,9 +30,11 @@ public class App {
         String[][] linesSplit = new String[lines.length][1];
         for (int i = 0; i < lines.length; i++) {
             System.out.println(String.format("Adding to 2d array: %s", Arrays.toString(lines[i].split(" "))));
+
             linesSplit[i] = lines[i].split(" ");
         }
         System.out.println(String.format("Final array: %s", Arrays.deepToString(linesSplit)));
+
         return linesSplit;
     }
 
@@ -65,6 +68,19 @@ public class App {
                 }
 
                 break;
+            case "while":
+                try {
+                    indentAmount += 1;
+                    String[] newCode;
+                    for (int j = i; j < code.length; j++) {
+                        // search until find end and make new code array to send through execute
+                        // function
+
+                    }
+
+                } catch (Exception e) {
+                    System.err.println("lol what");
+                }
 
             default:
                 break;
