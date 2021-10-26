@@ -6,15 +6,21 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class App {
+
     static Map<String, Integer> variables = new HashMap<String, Integer>();
 
     public static void main(String[] args) throws Exception {
+        long startTime = System.nanoTime();
         // Main function: extracts code from txt, splits into lines, parses lines,
         // executes parsed lines
         String content = extracted();
         String[] lines = content.split(";");
         String[][] code = parse(lines);
         execute(code);
+        long endTime = System.nanoTime();
+
+        long duration = (endTime - startTime);
+        System.out.println(String.format("Duration: %sms", duration / 1000000));
     }
 
     private static String extracted() throws IOException {
