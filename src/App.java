@@ -1,13 +1,15 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 public class App {
     static Map<String, Integer> variables = new HashMap<String, Integer>();
-    static int indentAmount = 0;
+    Stack<String> whileLoopConStack = new Stack<String>();
 
     public static void main(String[] args) throws Exception {
         // Main function: extracts code from txt, splits into lines, parses lines,
@@ -21,7 +23,10 @@ public class App {
     private static String extracted() throws IOException {
         // Reads lines from txt and removes \n from every line
         String content = new String(Files.readAllBytes(Paths.get("barebonesCode.txt")));
-        content = content.replace("\n", "").replace("\r", "");
+        content = content.replaceAll("^\s*-", "").replace("\r", "").replace("\n", "");
+
+        System.out.println("roiejasopijseropij");
+        System.out.println(content);
         return content;
     }
 
@@ -42,6 +47,7 @@ public class App {
         for (int i = 0; i < code.length; i++) {
             String opcode = code[i][0];
             String operand = code[i][1];
+            ArrayList<String> cars = new ArrayList<String>();
 
             switch (opcode) {
             case "clear":
@@ -70,16 +76,9 @@ public class App {
                 break;
             case "while":
                 try {
-                    indentAmount += 1;
-                    String[] newCode;
-                    for (int j = i; j < code.length; j++) {
-                        // search until find end and make new code array to send through execute
-                        // function
-
-                    }
 
                 } catch (Exception e) {
-                    System.err.println("lol what");
+                    System.err.println(e);
                 }
 
             default:
