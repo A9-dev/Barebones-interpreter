@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class App {
-
     static Map<String, Integer> variables = new HashMap<String, Integer>();
 
     public static void main(String[] args) throws Exception {
@@ -18,7 +17,6 @@ public class App {
         String[][] code = parse(lines);
         execute(code);
         long endTime = System.nanoTime();
-
         long duration = (endTime - startTime);
         System.out.println(String.format("Duration: %sms", duration / 1000000));
     }
@@ -27,7 +25,6 @@ public class App {
         // Reads lines from txt and removes \n from every line
         String content = new String(Files.readAllBytes(Paths.get("barebonesCode.txt")));
         content = content.replace("\r", "").replace("\n", "").replaceAll(";\s*", ";");
-
         System.out.println(content);
         return content;
     }
@@ -52,8 +49,8 @@ public class App {
             switch (opcode) {
             case "clear":
                 variables.put(operand, 0);
-
                 break;
+
             case "incr":
                 try {
                     variables.replace(operand, variables.get(operand) + 1);
@@ -62,8 +59,8 @@ public class App {
                             "Error occurred on line %s, most likely due to incrementing before variable declaration",
                             i + 1));
                 }
-
                 break;
+
             case "decr":
                 try {
                     variables.replace(operand, variables.get(operand) - 1);
@@ -72,8 +69,8 @@ public class App {
                             "Error occurred on line %s, most likely due to decrementing before variable declaration",
                             i + 1));
                 }
-
                 break;
+
             case "while":
                 try {
 
@@ -100,10 +97,9 @@ public class App {
 
                 } catch (Exception e) {
                     System.err.println(e);
-
                 }
-
                 break;
+
             case "end":
                 try {
 
@@ -115,14 +111,6 @@ public class App {
                 break;
             }
             System.out.println(variables.toString());
-            try {
-
-                if (variables.get("X") == -10) {
-                    System.exit(1);
-                }
-            } catch (Exception e) {
-
-            }
         }
     }
 }
