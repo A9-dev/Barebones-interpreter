@@ -1,3 +1,5 @@
+This was the challenge for week two of Space Cadets and is an interpreter for a simple language known as "Bare Bones."
+
 Bare Bones is the simple language that Brookshear uses in his book, ['Computer Science: an Overview'](https://www.amazon.co.uk/Computer-Science-Overview-Glenn-Brookshear/dp/0321544285/ref=sr_1_1?ie=UTF8&s=books&qid=1225741559&sr=8-1), to illustrate the power of Turing complete machines and investigate the halting problem.
 
 Bare Bones has three simple commands for manipulating a variable:
