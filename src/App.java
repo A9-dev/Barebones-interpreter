@@ -24,7 +24,8 @@ public class App {
     private static String extracted() throws IOException {
         // Reads lines from txt and removes \n from every line
         String content = new String(Files.readAllBytes(Paths.get("barebonesCode.txt")));
-        content = content.replace("\r", "").replace("\n", "").replaceAll(";\s*", ";");
+        content = content.replace("\r", "").replace("\t", "").replace("\n", "").replaceAll(";\s*", ";");
+
         System.out.println(content);
         return content;
     }
